@@ -1,6 +1,10 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import * as dotenv from "dotenv";
 
+// load config file
+// dotenv.config({ path: path.resolve(__dirname, "../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 let mainWindow: BrowserWindow | null = null;
 
 const createWindow = () => {
@@ -12,8 +16,14 @@ const createWindow = () => {
     },
   });
 
+  // if (process.env.NODE_ENV === "development") {
+  //   mainWindow.loadURL("http://localhost:5173");
+  // } else {
+  //   mainWindow.loadFile(path.join(__dirname, "../frontend/dist/index.html"));
+  // }
+
   if (process.env.NODE_ENV === "development") {
-    mainWindow.loadURL("http://localhost:3000");
+    mainWindow.loadURL("http://localhost:5173");
   } else {
     mainWindow.loadFile(path.join(__dirname, "../frontend/dist/index.html"));
   }

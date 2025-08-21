@@ -1,11 +1,14 @@
 {
   "devDependencies": {
-    "@types/electron": "^1.4.38",
     "@types/node": "^24.3.0",
     "concurrently": "^9.2.0",
     "electron": "^37.3.1",
+    "electron-builder": "^26.0.12",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "wait-on": "^8.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1"
   }
 }
