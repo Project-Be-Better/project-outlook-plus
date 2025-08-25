@@ -1,8 +1,32 @@
-import { weekdays, type Weekday } from "./types";
+import { weekdays } from "./types";
+import type { Weekday, WeekViewProps } from "./types";
 
 const hours = Array.from({ length: 24 }, (_, i) => i);
 
-const WeekView = () => {
+const WeekView = ({ currentDate, onSlotClick }: WeekViewProps) => {
+  const formatHour = (hour: number): string => {
+    if (hour === 0) {
+      return "12 AM";
+    }
+    if (hour < 12) {
+      return `${hour} AM`;
+    }
+    if (hour === 12) {
+      return "12 PM";
+    }
+    return `${hour - 12} PM`;
+  };
+
+  const handleSlotClick = (dayIndex: number, hour: number) => {
+    if (!onSlotClick) {
+      console.log(`Clicked on , but nothing here. ${dayIndex} : ${hour}`);
+      return;
+    }
+
+    const slotDate = new Date(currentDate);
+    console.log(slotDate);
+  };
+
   return (
     <div className="flex h-full">
       {/* Sidebar */}
@@ -11,15 +35,7 @@ const WeekView = () => {
         <div className="h-12"></div>
         {hours.map((hour) => (
           <div className="h-12" key={hour}>
-            <h1>
-              {hour === 0
-                ? "12 AM"
-                : hour < 12
-                  ? `${hour} AM`
-                  : hour === 12
-                    ? "12 PM"
-                    : `${hour - 12} PM`}
-            </h1>
+            <h1>{formatHour(hour)}</h1>
           </div>
         ))}
       </div>
@@ -39,13 +55,14 @@ const WeekView = () => {
 
         {/* Day Columns */}
         <div className="grid grid-cols-7">
-          {weekdays.map((day) => (
+          {weekdays.map((day, dayIndex) => (
             <div key={day}>
               <div className="border-r border-gray-300">
                 {hours.map((hour) => (
                   <div
                     key={hour}
                     className="h-12 border-b border-gray-300 hover:bg-blue-100"
+                    onClick={() => handleSlotClick(dayIndex, hour)}
                   ></div>
                 ))}
               </div>

@@ -22,9 +22,14 @@ export interface CalendarEvent {
 }
 
 // WeekView Props
+// export interface WeekViewProps {
+//   events: CalendarEvent[];
+//   currentDate: Date;
+//   onClickEvent?: (event: CalendarEvent) => void;
+//   onSlotClick?: (date: Date) => void;
+// }
 export interface WeekViewProps {
-  events: CalendarEvent[];
   currentDate: Date;
-  onClickEvent?: (event: CalendarEvent) => void;
-  onSlotClick?: (date: Date) => void;
+  onSlotClick?: (date: Date) => void; // click empty slot
+  onEventClick?: (eventId: string) => void; // later for event blocks
 }
